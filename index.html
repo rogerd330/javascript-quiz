@@ -1,8 +1,104 @@
 <html>
     <head>
 
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+
+            .answer {
+                border: 2px solid #fff;
+            }
+
+            .right {
+                border-color: #090;
+                color: #090;
+            }
+
+            .wrong {
+                border-color: #900;
+                color: #900;
+            }
+            
+        </style>
+
     </head>
     <body>
-        <a href="">Hello Class</a>
+
+        <h1>Simple Quiz</h1>
+        
+        <div>
+        <label for="a1">What color is the sky?</label>
+        <input type="text" placeholder="Your Answer..." required="required" id="a1">
+        <span id="icon1"></span>
+        </div>
+
+        <div>
+        <label for="q2">What animal says "oink"?</label>
+        <input type="text" placeholder="Your Answer..." required="required" id="a2">
+        <span id="icon2"></span>
+        </div>
+
+        <div>
+        <label for="q3">What is a number between 1 and 3?</label>
+        <input type="text" placeholder="Your Answer..." required="required" id="a3">
+        <span id="icon3"></span>
+        </div>
+
+        <div>
+        <label for="q4">What zodiac sign is July?</label>
+        <input type="text" placeholder="Your Answer..." required="required" id="a4">
+        <span id="icon4"></span>
+        </div>
+
+        <div>
+        <label for="q5">What web programming langage makes front end dynamic?</label>
+        <input type="text" placeholder="Your Answer..." required="required" id="a5">
+        <span id="icon5"></span>
+        </div>
+
+        <p>
+            <button onClick="checkAnswers();" class="btn btn-primary">Check All</button>
+        </p>
+        <p>
+            <button onClick="clearAnswers();" class="btn btn-secondary">Clear Answers</button>
+        </p>
+
+        <script>
+        
+        function getAnswer(field) {
+            console.log(field);
+            let answer = document.getElementById(field);
+            return answer.value;
+        }
+
+        function checkAnswers() {
+            let answers = ["Blue", "Pig", 2, "Cancer", "JavaScript"];
+
+            for (let i = 0; i < 5; i++) {
+                let fieldId = i + 1;
+                let answer = getAnswer("a" + fieldId);
+
+                gradeAnswer(fieldId, answer == answers[i]);
+            }
+        }
+
+        function gradeAnswer(field, isRight) {
+            let gradeClass = isRight ? "answer right" : "answer wrong";
+            let gradeIcon = isRight ? '<i class="fa fa-check right" aria-hidden="true"></i>' : '<i class="fa fa-thumbs-down wrong" aria-hidden="true"></i>';
+            document.getElementById("a" + field).className = gradeClass;
+            document.getElementById("icon" + field).innerHTML = gradeIcon;
+        }
+
+        function clearAnswers() {
+            for (let i = 1; i < 6; i++) {
+                let field = document.getElementById("a" + i);
+                field.value = null;
+                field.className = null;
+                document.getElementById("icon" + i).innerHTML = null;
+            }
+        }
+
+        </script>
+
     </body>
 </html>
